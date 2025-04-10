@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,13 +13,13 @@
             <label for="email">Email address</label>
             <input type="email" id="email" name="to_email" required>
             <input type="hidden" name="random_number" id="randomNumber">
-            <button type="submit" id="sendEmailBtn">Send email</button>
-            <span id="timerText"></span> <!-- 显示倒计时 -->
+            <button type="submit" id="sendEmailBtn">Send Email</button>
+            <span id="timerText"></span> <!-- Countdown display -->
         </form>
 
-        <h2>Change password</h2>
+        <h2>Change Password</h2>
         <form id="pincodeForm">
-            <h3>Enter the pincode to change password.</h3>
+            <h3>Enter the pincode to change your password.</h3>
             <input type="password" id="inputpincode" placeholder="Enter pincode here">
             <span id="Errorpincode"></span>
             <button id="submitpincode" type="button">SUBMIT</button>
@@ -27,105 +27,104 @@
     </div>
 
     <script>
-        // 初始化 EmailJS
+        // Initialize EmailJS
         (function(){
-            emailjs.init("WNuxY682Ux6oPiCUN");  // 你的 EmailJS Public Key
+            emailjs.init("WNuxY682Ux6oPiCUN");  // Your EmailJS Public Key
         })();
 
-        let sentRandomNumber = null; // 存储发送的 OTP
-        let countdownTimer = null; // 计时器变量
-        let countdown = 40; // 倒计时 40 秒
-        let sendAttempt = 0; // 发送邮件的次数
-        const maxAttempts = 3; // 限制最多发送 3 次
+        let sentRandomNumber = null; // Store the sent OTP
+        let countdownTimer = null; // Countdown timer variable
+        let countdown = 40; // 40-second countdown
+        let sendAttempt = 0; // Number of email send attempts
+        const maxAttempts = 3; // Maximum of 3 sends allowed
         const timerText = document.getElementById("timerText");
         const sendEmailBtn = document.getElementById("sendEmailBtn");
 
-        // 生成随机 4 位数 OTP
+        // Generate a random 4-digit OTP
         function generateRandomNumber() {
             return Math.floor(1000 + Math.random() * 9000);
         }
 
-        // 发送邮件功能
+        // Handle email sending
         document.getElementById("emailForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // 阻止默认提交行为
+            event.preventDefault(); // Prevent default form submission
             
             if (sendAttempt >= maxAttempts) {
-                alert("You have reached the maximum number of OTP sending times and will be redirected to the home page!");
-                window.location.href = "Content.php"; // 直接跳转到 Content.php
+                alert("You have reached the maximum number of OTP requests and will be redirected to the home page!");
+                window.location.href = "Content.php"; // Redirect to Content.php
                 return;
             }
 
             if (countdown > 0 && sentRandomNumber !== null) {
-                alert(`Please wait ${countdown} Send email again in seconds!`);
+                alert(`Please wait ${countdown} seconds before sending the email again!`);
                 return;
             }
 
             sendOTP();
         });
 
-        // 发送 OTP 并启动倒计时
+        // Send the OTP and start the countdown
         function sendOTP() {
             const randomNum = generateRandomNumber();
             sentRandomNumber = randomNum.toString();
             document.getElementById("randomNumber").value = randomNum;
-            sendAttempt++; // 增加发送次数
+            sendAttempt++; // Increment send attempts
 
             emailjs.sendForm("service_9q3qmh4", "template_g61ng7d", document.getElementById("emailForm"))
                 .then(response => {
-                    alert("邮件发送成功！随机数: " + randomNum);
                     console.log("Success:", response);
                     startCountdown();
                 })
                 .catch(error => {
-                    alert("邮件发送失败！");
+                    alert("Failed to send email!");
                     console.error("Error:", error);
                     sentRandomNumber = null;
                 });
 
-            // 检查是否达到最大次数
+            // Check if max attempts reached
             if (sendAttempt >= maxAttempts) {
-                alert("您已达到最大 OTP 发送次数，即将跳转到首页！");
-                setTimeout(() => window.location.href = "Content.php", 3000); // 3 秒后自动跳转
+                alert("You have reached the maximum OTP sending limit. Redirecting to the homepage!");
+                setTimeout(() => window.location.href = "Content.php", 3000); // Redirect after 3 seconds
             }
         }
 
-        // 开始倒计时
+        // Start the countdown
         function startCountdown() {
-            clearInterval(countdownTimer); // 先清除可能存在的计时器
+            clearInterval(countdownTimer); // Clear existing timer
             countdown = 40;
-            sendEmailBtn.disabled = true; // 禁用发送按钮
-            timerText.textContent = `OTP 有效时间: ${countdown} 秒`;
+            sendEmailBtn.disabled = true; // Disable the send button
+            timerText.textContent = `OTP valid for: ${countdown} seconds`;
 
             countdownTimer = setInterval(() => {
                 countdown--;
-                timerText.textContent = `OTP 有效时间: ${countdown} 秒`;
+                timerText.textContent = `OTP valid for: ${countdown} seconds`;
 
                 if (countdown <= 0) {
                     clearInterval(countdownTimer);
                     sentRandomNumber = null;
-                    timerText.textContent = "OTP 已过期，请重新发送邮件！";
-                    sendEmailBtn.disabled = false; // 重新启用发送按钮
+                    timerText.textContent = "OTP has expired. Please send the email again!";
+                    sendEmailBtn.disabled = false; // Re-enable the send button
                 }
             }, 1000);
         }
 
-        // 处理 pincode 输入
+        // Handle pincode input
         document.getElementById("submitpincode").addEventListener("click", function(event) {
             event.preventDefault();
             let userpincode = document.getElementById("inputpincode").value.trim();
             let pincodeError = document.getElementById("Errorpincode");
 
-            pincodeError.textContent = ""; // 清空错误提示
+            pincodeError.textContent = ""; // Clear error message
 
             if (userpincode === "") {
-                pincodeError.textContent = "请输入 pincode";
+                pincodeError.textContent = "Please enter the pincode";
             } else if (sentRandomNumber === null) {
-                pincodeError.textContent = "OTP 已过期，请重新发送邮件";
+                pincodeError.textContent = "OTP has expired, please resend the email";
             } else if (userpincode === sentRandomNumber) {
-                clearInterval(countdownTimer); // 停止倒计时
+                clearInterval(countdownTimer); // Stop the countdown
                 window.location.href = "reset_password.php";
             } else {
-                pincodeError.textContent = "pincode 错误，请重新输入";
+                pincodeError.textContent = "Incorrect pincode, please try again";
                 document.getElementById("inputpincode").value = "";
             }
         });
