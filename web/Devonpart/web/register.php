@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $conn->prepare("SELECT user_id FROM users WHERE email = ?");
+        $stmt = $conn->prepare("SELECT user_id FROM user_profile WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
@@ -25,8 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>alert('This email is already registered!');</script>";
         } else {
             $token = bin2hex(random_bytes(32));
-            $confirm_link = "http://localhost/Website_assignment/web/Devonpart/web/confirm_email.php?token=$token&email=$email";
-            $cancel_link = "http://localhost/Website_assignment/web/Devonpart/web/cancel_email.php?email=$email";
+            $confirm_link = "http://localhost/a/Website_assignment/web/Devonpart/web/confirm_email.php?token=$token&email=$email";
+            $cancel_link = "http://localhost/a/Website_assignment/web/Devonpart/web/cancel_email.php?email=$email";
 
             $message = "
                 <h2>Email Confirmation</h2>

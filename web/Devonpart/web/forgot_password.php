@@ -1,13 +1,13 @@
 <?php
 require 'config/db.php';
-require 'email/send_email.php'; // 确保引入发送邮件的函数
+require 'email/send_email.php'; 
 
-$message_sent = false; // 标记是否成功发送邮件
+$message_sent = false; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
     $email = $_POST['email'];
 
-    $stmt = $conn->prepare("SELECT user_id FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT user_id FROM user_profile WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
         $created_at = date('Y-m-d H:i:s');
         $expires_at = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
-        $stmt = $conn->prepare("UPDATE users SET reset_token = ?, created_at = ?, expires_at = ?, status = 'pending' WHERE email = ?");
+        $stmt = $conn->prepare("UPDATE user_profile SET reset_token = ?, created_at = ?, expires_at = ?, status = 'pending' WHERE email = ?");
         $stmt->bind_param("ssss", $token, $created_at, $expires_at, $email);
         $stmt->execute();
 
@@ -25,9 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
         $message = "Click this link to reset your password: <a href='$reset_link'>$reset_link</a>";
         send_email($email, "Password Reset Request", $message);
 
-        $message_sent = true; // 设置邮件已发送的标志
+        $message_sent = true; 
     } else {
-        $message_sent = false; // 如果邮箱不存在
+        $message_sent = false;
     }
 }
 ?>

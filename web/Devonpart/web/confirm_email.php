@@ -13,7 +13,7 @@ if (isset($_GET['token']) && isset($_GET['email'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
 
-        $stmt_insert = $conn->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
+        $stmt_insert = $conn->prepare("INSERT INTO user_profile (username, email, password_hash) VALUES (?, ?, ?)");
         $stmt_insert->bind_param("sss", $row['username'], $email, $row['password_hash']);
         $stmt_insert->execute();
 

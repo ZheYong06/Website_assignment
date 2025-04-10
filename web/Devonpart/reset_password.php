@@ -4,7 +4,7 @@ require 'Devonpart/web/config/db.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
     $email = $_POST['email'];
 
-    $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT id FROM user_profile WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->store_result();
@@ -14,11 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
         $created_at = date('Y-m-d H:i:s');
         $expires_at = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
-        $stmt = $conn->prepare("INSERT INTO users (email, reset_token, created_at, expires_at, status) VALUES (?, ?, ?, ?, 'pending')");
+        $stmt = $conn->prepare("INSERT INTO user_profile (email, reset_token, created_at, expires_at, status) VALUES (?, ?, ?, ?, 'pending')");
         $stmt->bind_param("ssss", $email, $token, $created_at, $expires_at);
         $stmt->execute();
 
-        $reset_link = "http://localhost/users.php?token=$token";
+        $reset_link = "http://localhost/user_profile.php?token=$token";
         $message = "Click this link to reset your password: <a href='$reset_link'>$reset_link</a>";
         send_email($email, "Password Reset Request", $message);
 
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
 if (isset($_GET['token'])) {
     $token = $_GET['token'];
 
-    $stmt = $conn->prepare("SELECT email, created_at, expires_at FROM users WHERE reset_token = ? AND status = 'pending'");
+    $stmt = $conn->prepare("SELECT email, created_at, expires_at FROM user_profile WHERE reset_token = ? AND status = 'pending'");
     $stmt->bind_param("s", $token);
     $stmt->execute();
     $stmt->store_result();
@@ -56,10 +56,10 @@ if (isset($_GET['token'])) {
                 } else {
                     $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-                    $stmt = $conn->prepare("UPDATE users SET password_hash = ? WHERE email = ?");
+                    $stmt = $conn->prepare("UPDATE user_profile SET password_hash = ? WHERE email = ?");
                     $stmt->bind_param("ss", $hashed_password, $email);
                     if ($stmt->execute()) {
-                        $stmt = $conn->prepare("UPDATE users SET reset_token = NULL, status = 'active' WHERE reset_token = ?");
+                        $stmt = $conn->prepare("UPDATE user_profile SET reset_token = NULL, status = 'active' WHERE reset_token = ?");
                         $stmt->bind_param("s", $token);
                         if ($stmt->execute()) {
                             $success_message = "Password has been reset successfully!";
