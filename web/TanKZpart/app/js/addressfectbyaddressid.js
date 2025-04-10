@@ -6,7 +6,6 @@ document.getElementById("savebutton").addEventListener("click", function () {
     document.getElementById("layerNA1").style.display = "none";
 })
 
-
 document.getElementById("savebuttonbyADDid").addEventListener("click", function(event) {
     event.preventDefault(); // 阻止表单的默认提交行为
 
@@ -15,7 +14,9 @@ document.getElementById("savebuttonbyADDid").addEventListener("click", function(
 
     // 延迟跳转到指定页面（1秒可以根据需要调整）
     setTimeout(function() {
-        window.location.href = "web/TanKZpart/program/address.php";
+        window.location.href = "../../program/address.php";
+
+
     }, 1000); // 延迟1秒跳转
 })
 
