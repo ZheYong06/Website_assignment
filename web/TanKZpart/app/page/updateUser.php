@@ -1,5 +1,6 @@
 <?php
-include 'c:\xampp\htdocs\a\code_ass\web\app\lib\database.php';
+include '../lib/database.php';   
+
 session_start();
 // 确保 $_POST 中的键存在，防止 "Undefined index" 错误
 $user_id = $_SESSION['user_id'];

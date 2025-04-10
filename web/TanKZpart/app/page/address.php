@@ -1,5 +1,5 @@
 <?php
-include 'c:\xampp\htdocs\a\code_ass\web\app\lib\database.php';
+include '../lib/database.php';   
 session_start();
 var_dump($_SESSION);
 $user_id = $_SESSION["user_id"];

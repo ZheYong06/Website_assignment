@@ -1,5 +1,5 @@
 <?php
-include 'c:\xampp\htdocs\a\code_ass\web\app\lib\database.php';
+include '../lib/database.php';   
 session_start();
 $user_id = $_SESSION["user_id"];
 $phone_number = $_POST["phone_number"];

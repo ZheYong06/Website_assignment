@@ -1,8 +1,8 @@
 <?php session_start();?>
 <?php
 include '../app/lib/database.php';
-include 'C:\xampp\htdocs\a\Website_assigment\web\TanKZpart\app\lib\query.php';
-include 'c:\xampp\htdocs\a\code_ass\web\TanKZpart\app\lib\addressfetch.php';
+include '../app/lib/query.php';
+include '../app/lib/addressfetch.php';
 ?>
 <!DOCTYPE html>
 

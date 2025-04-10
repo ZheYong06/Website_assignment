@@ -37,9 +37,9 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
 
 
 <?php session_start();
-include 'c:\xampp\htdocs\a\code_ass\web\app\lib\database.php';
-include 'C:\xampp\htdocs\a\code_ass\web\app\lib\query.php';
-include 'c:\xampp\htdocs\a\code_ass\web\app\lib\addressfetch.php';
+include 'database.php';
+include 'query.php';
+include 'addressfetch.php';
 
 ?>
 <!DOCTYPE html>
