@@ -3,7 +3,7 @@ require __DIR__ . '/config/db.php';
 
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-$sql = "SELECT username, email FROM users WHERE username LIKE ?";
+$sql = "SELECT username, email FROM user_profile WHERE username LIKE ?";
 $stmt = $conn->prepare($sql);
 $searchTerm = "%{$search}%";
 $stmt->bind_param("s", $searchTerm);

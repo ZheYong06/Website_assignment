@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = isset($_POST["password"]) ? $_POST["password"] : null;
 
     if ($password) {
-        $stmt = $conn->prepare("SELECT user_id, username, password_hash FROM users WHERE email = ?");
+        $stmt = $conn->prepare("SELECT user_id, username, password_hash FROM user_profile WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
