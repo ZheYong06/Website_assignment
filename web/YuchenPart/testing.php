@@ -8,16 +8,16 @@
 </head>
 <body>
     <div>
-        <h2>发送邮件</h2>
+        <h2>Send Email</h2>
         <form id="emailForm">
-            <label for="email">收件人邮箱：</label>
+            <label for="email">Email address</label>
             <input type="email" id="email" name="to_email" required>
             <input type="hidden" name="random_number" id="randomNumber">
-            <button type="submit" id="sendEmailBtn">发送邮件</button>
+            <button type="submit" id="sendEmailBtn">Send email</button>
             <span id="timerText"></span> <!-- 显示倒计时 -->
         </form>
 
-        <h2>更改密码</h2>
+        <h2>Change password</h2>
         <form id="pincodeForm">
             <h3>Enter the pincode to change password.</h3>
             <input type="password" id="inputpincode" placeholder="Enter pincode here">
@@ -50,13 +50,13 @@
             event.preventDefault(); // 阻止默认提交行为
             
             if (sendAttempt >= maxAttempts) {
-                alert("您已经达到最大 OTP 发送次数，即将跳转到首页！");
+                alert("You have reached the maximum number of OTP sending times and will be redirected to the home page!");
                 window.location.href = "Content.php"; // 直接跳转到 Content.php
                 return;
             }
 
             if (countdown > 0 && sentRandomNumber !== null) {
-                alert(`请等待 ${countdown} 秒后再发送邮件！`);
+                alert(`Please wait ${countdown} Send email again in seconds!`);
                 return;
             }
 

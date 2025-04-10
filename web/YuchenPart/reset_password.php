@@ -43,24 +43,24 @@
 </head>
 <body>
     <div class="container">
-        <h2>更改密码</h2>
+        <h2>Change password</h2>
         <form id="resetPasswordForm">
             <div class="form-group">
-                <label for="username">用户名：</label>
+                <label for="username">Username：</label>
                 <input type="text" id="username" name="username" required>
                 <span id="usernameError" class="error"></span>
             </div>
             <div class="form-group">
-                <label for="newPassword">新密码：</label>
+                <label for="newPassword">New password：</label>
                 <input type="password" id="newPassword" name="newPassword" required>
                 <span id="newPasswordError" class="error"></span>
             </div>
             <div class="form-group">
-                <label for="confirmPassword">确认新密码：</label>
+                <label for="confirmPassword">Comfirm new password：</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" required>
                 <span id="confirmPasswordError" class="error"></span>
             </div>
-            <button type="submit">提交更改</button>
+            <button type="submit">Submit change</button>
         </form>
     </div>
 
@@ -82,19 +82,19 @@
 
             // 客户端验证
             if (username === "") {
-                usernameError.textContent = "请输入用户名";
+                usernameError.textContent = "Please enter username";
                 return;
             }
             if (newPassword === "") {
-                newPasswordError.textContent = "请输入新密码";
+                newPasswordError.textContent = "Please enter password";
                 return;
             }
             if (confirmPassword === "") {
-                confirmPasswordError.textContent = "请确认新密码";
+                confirmPasswordError.textContent = "Please comfirm password";
                 return;
             }
             if (newPassword !== confirmPassword) {
-                confirmPasswordError.textContent = "新密码与确认密码不一致";
+                confirmPasswordError.textContent = "The new password and the confirmed password do not match";
                 return;
             }
 
@@ -111,7 +111,7 @@
             .then(response => response.text())
             .then(data => {
                 if (data === "success") {
-                    alert("密码更改成功！");
+                    alert("Password changed successfully");
                     window.location.href = "Content.php"; // 跳转回登录页
                 } else {
                     alert(data); // 显示错误信息

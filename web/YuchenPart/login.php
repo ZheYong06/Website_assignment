@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $new_password = $_POST['new_password'] ?? '';
 
         if (empty($username) || empty($new_password)) {
-            echo "所有字段都必须填写";
+            echo "All fields are required";
             exit;
         }
 
@@ -122,10 +122,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt->execute()) {
                 echo "success";
             } else {
-                echo "密码更新失败";
+                echo "Password update fail";
             }
         } else {
-            echo "用户名不存在";
+            echo "username does not exist";
         }
         $stmt->close();
     } elseif ($action === 'check_session') {
