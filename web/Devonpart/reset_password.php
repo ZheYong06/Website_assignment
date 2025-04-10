@@ -1,5 +1,5 @@
 <?php
-require 'member_system/web/config/db.php';
+require 'Devonpart/web/config/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
     $email = $_POST['email'];
