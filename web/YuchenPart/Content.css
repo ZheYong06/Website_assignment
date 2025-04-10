@@ -12,7 +12,7 @@ body {
 
 /* 登录框 */
 .square {
-    background-color: #ffffff;
+    background-color: #000000;
     padding: 40px 30px;
     border-radius: 15px;
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
