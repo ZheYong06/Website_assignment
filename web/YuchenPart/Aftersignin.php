@@ -28,12 +28,6 @@
             </div>
         </div>
     </div>
-    <div class="logout-container">
-    <form action="logout.php" method="post">
-        <button type="submit" class="logout-button">Log Out</button>
-    </form>
-</div>
-
     <a href="logout.php" style="color: red;">Logout</a>
 
 </body>
