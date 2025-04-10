@@ -13,7 +13,7 @@
         <div class="left-section">
             <h1>Memberlist</h1>
             <div class="SPACE01">
-                <a href="Content.html">
+                <a href="Content.php">
                     <img src="user_icon_007.jpg" class="Clickanimation" alt="User Icon">
                 </a>
             </div>
@@ -22,7 +22,7 @@
         <div class="right-section">
             <h1>Product</h1>
             <div class="SPACE02">
-                <a href="Content.html">
+                <a href="Content.php">
                     <img src="Product_sample_icon_picture.png" class="Clickanimation" alt="Product Image">
                 </a>
             </div>
