@@ -17,6 +17,11 @@ body {
     width: 80%;
     max-width: 1200px;
     height: 100%; /* 让内部垂直居中生效 */
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    background-color: #ffffff;
 }
 
 /* 左侧区域 */
@@ -27,6 +32,9 @@ body {
     align-items: center;
     justify-content: center; /* 垂直居中！ */
     text-align: center;
+    background-color: #e8f5e9; /* 添加左侧背景色 */
+    border-radius: 10px;
+    padding: 20px;
 }
 
 /* 右侧区域 */
@@ -37,6 +45,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #e1f5fe; /* 添加右侧背景色 */
+    border-radius: 10px;
+    padding: 20px;
 }
 
 /* 方框样式 */
@@ -51,6 +62,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     margin-top: 20px;
+    transition: transform 0.3s ease; /* 添加过渡效果 */
 }
 
 /* 图片样式 */
@@ -58,12 +70,13 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease, filter 0.3s ease; /* 图片过渡效果 */
 }
 
 /* 点击动画效果 */
 .Clickanimation:active {
     transform: scale(0.95);
-    border-radius: 10px;
+    filter: brightness(0.9); /* 点击时添加亮度变化 */
 }
 
 /* 小屏幕响应式 */
@@ -77,4 +90,37 @@ body {
         width: 80%;
         margin: 20px 0;
     }
+
+    .SPACE01, .SPACE02 {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+/* 自定义按钮样式 */
+a.logout-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: red;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a.logout-button:hover {
+    background-color: #c62828; /* 悬停时的效果 */
+}
+
+a.logout-button:active {
+    transform: scale(0.95); /* 点击时的缩放效果 */
+}
+
+/* 整体标题样式 */
+h1 {
+    font-size: 24px;
+    color: #333;
+    font-weight: 600;
 }
