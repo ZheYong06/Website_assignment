@@ -1,0 +1,106 @@
+/* 背景整体设置 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 登录框容器 */
+.square {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+}
+
+/* 标题样式 */
+.square h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+.square hr {
+    border: none;
+    height: 2px;
+    background-color: #ecf0f1;
+    margin: 10px 0;
+}
+
+/* 标签文字 */
+h3 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+/* 输入框样式 */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    transition: border 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* 忘记密码链接 */
+#special a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #3498db;
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+}
+
+#special a:hover {
+    text-decoration: underline;
+}
+
+/* 登录按钮 */
+#LOGINbutton {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#LOGINbutton:hover {
+    background-color: #2980b9;
+}
+
+/* 响应式 */
+@media (max-width: 480px) {
+    .square {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    #LOGINbutton {
+        font-size: 14px;
+    }
+}
