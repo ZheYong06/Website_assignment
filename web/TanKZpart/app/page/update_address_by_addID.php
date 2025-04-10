@@ -19,7 +19,8 @@ $stmt->execute();
 $stmt->close();
 $conn->close();
 
-header("Location: ../../../program/address.php"); // 重定向到地址页面
+header("Location: ../../../TanKZpart/program/address.php"); // 重定向到地址页面
+
 exit; // 加上 exit() 确保脚本在发送头部后停止执行
 
 
