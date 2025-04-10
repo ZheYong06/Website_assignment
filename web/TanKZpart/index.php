@@ -33,7 +33,7 @@ include 'app/lib/query.php';
         </a>
 
         <a href="program/address.php" class="closeline">
-            <p class="AddressLabel">Address</p>
+            <p class="AddressLabel">Addresshahahahaha</p>
         </a>
 
     </div>
