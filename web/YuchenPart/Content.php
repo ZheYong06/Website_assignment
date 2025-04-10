@@ -53,7 +53,7 @@
                     .then(data => {
                         console.log("Server response:", data); // 检查 PHP 返回的数据
                         if (data === "success") {
-                            window.location.href = "Aftersignin.html";
+                            window.location.href = "Aftersignin.php";
                         } else {
                             alert(data);
                         }
