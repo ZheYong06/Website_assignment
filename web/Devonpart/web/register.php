@@ -25,8 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>alert('This email is already registered!');</script>";
         } else {
             $token = bin2hex(random_bytes(32));
-            $confirm_link = "http://localhost/member_system/web/confirm_email.php?token=$token&email=$email";
-            $cancel_link = "http://localhost/member_system/web/cancel_email.php?email=$email";
+            $confirm_link = "http://localhost/Website_assignnment/web/Devonpart/web/confirm_email.php?token=$token&email=$email";
+            $cancel_link = "http://localhost/Website_assignnment/web/Devonpart/web/cancel_email.php?email=$email";
 
             $message = "
                 <h2>Email Confirmation</h2>
