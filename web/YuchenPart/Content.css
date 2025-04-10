@@ -1,43 +1,57 @@
-/* 背景整体设置 */
+/* 整体背景设置 */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    background: linear-gradient(to right, #141e30, #243b55);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
-/* 登录框容器 */
+/* 登录框 */
 .square {
     background-color: #ffffff;
-    padding: 40px;
+    padding: 40px 30px;
     border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
     width: 90%;
     max-width: 400px;
+    animation: fadeIn 0.8s ease-out;
 }
 
-/* 标题样式 */
+/* 淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 标题 */
 .square h1 {
     text-align: center;
     color: #2c3e50;
-    margin-bottom: 30px;
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
 .square hr {
     border: none;
     height: 2px;
     background-color: #ecf0f1;
-    margin: 10px 0;
+    margin-top: 10px;
 }
 
-/* 标签文字 */
+/* 标签 */
 h3 {
+    margin: 15px 0 5px;
     color: #2c3e50;
-    margin-bottom: 5px;
     font-size: 16px;
 }
 
@@ -46,11 +60,11 @@ input[type="text"],
 input[type="password"] {
     width: 100%;
     padding: 10px 12px;
-    font-size: 16px;
+    font-size: 15px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    margin-bottom: 10px;
-    transition: border 0.3s;
+    transition: border-color 0.3s ease;
+    margin-bottom: 5px;
 }
 
 input:focus {
@@ -58,14 +72,19 @@ input:focus {
     border-color: #3498db;
 }
 
+/* 错误提示文字 */
+span {
+    font-size: 13px;
+    color: red;
+}
+
 /* 忘记密码链接 */
 #special a {
     font-size: 14px;
-    text-decoration: none;
     color: #3498db;
-    display: block;
+    text-decoration: none;
+    float: right;
     margin-top: 5px;
-    text-align: right;
 }
 
 #special a:hover {
@@ -76,24 +95,26 @@ input:focus {
 #LOGINbutton {
     width: 100%;
     padding: 12px 0;
+    margin-top: 25px;
     font-size: 16px;
+    font-weight: bold;
     background-color: #3498db;
     color: white;
     border: none;
     border-radius: 6px;
-    margin-top: 20px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
 #LOGINbutton:hover {
     background-color: #2980b9;
+    transform: scale(1.03);
 }
 
 /* 响应式 */
 @media (max-width: 480px) {
     .square {
-        padding: 20px;
+        padding: 25px 20px;
     }
 
     h1 {
@@ -102,5 +123,6 @@ input:focus {
 
     #LOGINbutton {
         font-size: 14px;
+        padding: 10px 0;
     }
 }
