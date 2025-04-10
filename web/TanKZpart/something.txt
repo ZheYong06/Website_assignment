@@ -3,8 +3,8 @@ change phone number need cancel and reset password   (if can also do verified)
 when click email and phonenumber body try to blur together
 if don't have img what will be happend?
 address invalid function
-my address edit href cannot jump to correct way
 foreign key haven't done yet
-
+photo got problem can't upload to sql
 change password wait for devon
+
 sdads
