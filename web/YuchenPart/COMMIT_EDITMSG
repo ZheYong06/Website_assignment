@@ -1,0 +1,21 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is behind 'origin/main' by 2 commits, and can be fast-forwarded.
+#   (use "git pull" to update your local branch)
+#
+# Changes to be committed:
+#	new file:   web/YuchenPart/Admin login page.jpg
+#	new file:   web/YuchenPart/Aftersignin.html
+#	new file:   web/YuchenPart/Content.php
+#	new file:   web/YuchenPart/Forgot-password copy.css
+#	new file:   web/YuchenPart/Forgot-password.css
+#	new file:   web/YuchenPart/Style.css
+#	new file:   web/YuchenPart/changepassword.css
+#	new file:   web/YuchenPart/login.php
+#	new file:   web/YuchenPart/pincode.css
+#	new file:   web/YuchenPart/reset_password.php
+#	new file:   web/YuchenPart/testing.php
+#
