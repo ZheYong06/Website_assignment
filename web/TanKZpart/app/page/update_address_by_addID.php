@@ -19,7 +19,7 @@ $stmt->execute();
 $stmt->close();
 $conn->close();
 
-header("Location: /a/code_ass/web/program/address.php");
+header("Location: ../../../program/address.php"); // 重定向到地址页面
 exit; // 加上 exit() 确保脚本在发送头部后停止执行
 
 
