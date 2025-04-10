@@ -2,7 +2,7 @@
 <html>
     <head>
         <title> Admin Login Page </title>
-        <link rel="stylesheet" href="Style.css">
+        <link rel="stylesheet" href="Content.css">
     </head>
     <body>
         <div class="square"> 
