@@ -1,0 +1,297 @@
+.UpBlock {
+    position: fixed;
+
+    height: 130px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+body {
+    color: rgb(0, 0, 0);
+    background-color: rgb(223, 223, 223)
+}
+
+.moveup{
+margin-top: -15px;
+}
+
+.LeftSideBodden {
+    position: absolute;
+    width: 200px;
+    height: 300px;
+    margin-left: 330px;
+    margin-top: 180px;
+}
+
+.UserImage2 {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: fill;
+    position: absolute;
+
+}
+
+.user_account2 {
+    margin-left: 67px;
+    margin-top: 5px;
+    color: black;
+
+}
+
+.editprofile {
+    margin-left: 67px;
+    margin-top: -10px;
+    color: black;
+    position: absolute;
+    text-decoration: none;
+}
+
+.closeline {
+    text-decoration: none;
+}
+
+.usericon {
+    margin-top: 10px;
+    margin-left: 5px;
+    height: 20px;
+    width: 20px;
+}
+
+.labelMyaccount {
+
+    margin-left: 38px;
+    margin-top: -22px;
+    color: black;
+}
+
+
+
+.AddressLabel {
+    margin-left: 38px;
+
+    color: black;
+}
+
+.profileblock {
+    background-color: rgb(255, 255, 255);
+    height: 530px;
+    width: 870px;
+    transform: translate(560px, -53px);
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 20px;
+    padding-right: 30px;
+    margin-top: 200px;
+    position: absolute;
+}
+
+.myprofile {
+    margin-top: 0px;
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+}
+
+.hr{
+    width: 931px;
+    position: absolute;
+    transform: translate(559px,235px);
+    z-index: 100; 
+}
+
+.manageP {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    margin-top: -30px;
+}
+
+.movedown{
+    margin-top: 40px;
+}
+
+.newaddress {
+    position: absolute;
+    transform: translate(640px, -80px);
+    font-size: 20px;
+}
+
+.address-box{
+    padding-top: 0px;
+    padding-left: 12px;
+    padding-right: 10px;
+    max-height: 390px; /* 设定最大高度 */
+    overflow-y: auto;  /* 启用垂直滚动 */
+    border: 1px solid #a8a8a8; /* 可选：增加边框让滚动区域更明显 */
+    position: relative; /* 让按钮以它为参考点 */
+}
+
+.address-item{
+    position: relative; /* 让按钮相对每个地址项定位 */
+    padding: 0px;
+    border-bottom: 1px solid #ccc;
+}
+
+.edit{
+    position: absolutey;
+    left: 700px;
+    top: 9px;
+    border: none;       
+    color: blue;
+    background-color: white;
+    cursor: pointer;           
+}
+
+.delete{
+    position: absolute;
+    RIGHT: 2px;
+    top: 9px;
+    border: none;       
+    color: blue;
+    background-color: white;
+    cursor: pointer;
+}
+
+.addname{
+    margin-top: 12px;
+    margin-left: 0px;
+    font-size: 20px;
+}
+
+.floor{
+color: grey;
+margin-top: -10px;
+}
+
+.district{
+    color: grey;
+    margin-top: -10px;
+}
+
+
+
+
+.layerNA11 {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+
+}
+
+.layerNA22 {
+
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+    width: 450px;
+    height: 600px;
+    background-color: white;
+    
+}
+
+.layerNA3{
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.layertext {
+    font-size: 20px;
+    margin-top: 10px;
+    text-align: center;
+
+}
+
+.inputaddname{
+    width: 175px;
+    height: 30px;
+    padding-left: 10px;
+}
+
+.inputaddpost{
+    width: 175px;
+    height: 30px;
+    padding-left: 10px;
+    margin-left: 20px;
+}
+
+.inputaddfloor{
+    width: 390px;
+    height: 30px;
+    margin-top: 20px;
+    padding-left: 10px;
+}
+
+.inputaddstate{
+    width: 390px;
+    height: 30px;
+    margin-top: 20px;
+    padding-left: 10px;
+}
+
+.inputaddsid{
+    width: 390px;
+    height: 30px;
+    margin-top: 20px;
+    padding-left: 10px;
+}
+
+.buttonsavenewadd{
+    margin-top: 20px;
+    width: 120px;
+    height: 36px;
+}
+
+.cancelbutton{
+    margin-top: 20px;
+    margin-left: 160px;
+    width: 120px;
+    height: 36px;
+}
+
+
+
+.layerA11 {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+
+}
+.layerA12{
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+}
+.layerA22 {
+
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+    width: 450px;
+    height: 600px;
+    background-color: white;
+    
+}
+
+.layerA3{
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
