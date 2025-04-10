@@ -4,7 +4,7 @@ document.getElementById("newaddres").addEventListener("click", function () {
 
 document.getElementById("savebuttonbyADDid").addEventListener("click", function(event) {
     event.preventDefault(); // 阻止表单的默认提交行为
-
+    console.log('Button clicked:', button);
     // 手动提交表单
     document.querySelector("form").submit(); 
 
