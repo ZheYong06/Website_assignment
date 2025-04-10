@@ -130,7 +130,8 @@ include 'addressfetch.php';
                         <input type="text" placeholder="State" name="state" class="inputaddstate" value="<?= $addressrows['state'] ?? ''; ?>" require>
                         <input type="text" placeholder="District" name="district" class="inputaddsid" value="<?= $addressrows['district'] ?? ''; ?>" require>
                         <input type="submit" id="savebuttonbyADDid" class="buttonsavenewadd" value="save">
-                        <button type="button" class="cancelbutton" onclick="window.location.href='/a/code_ass/web/program/address.php'">cancel</button>
+                        <button type="button" class="cancelbutton" onclick="window.location.href='/a/code_ass/web/TanKZpart/program/address.php'">cancel</button>
+                      
                     </form>
                 </div>
             </div>

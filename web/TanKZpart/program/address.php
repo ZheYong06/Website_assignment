@@ -92,7 +92,7 @@ include '../app/lib/addressfetch.php';
                         <input type="text" placeholder="State" name="state" class="inputaddstate" require>
                         <input type="text" placeholder="District" name="district" class="inputaddsid" require>
                         <input type="submit" id="savebutton" class="buttonsavenewadd" value="save">
-                        <button type="button" id="cancelbutton2" class="cancelbutton">cance l</button>
+                        <button type="button" id="cancelbutton2" class="cancelbutton">cancel</button>
                     </form>
                 </div>
             </div>
