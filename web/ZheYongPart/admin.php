@@ -43,7 +43,7 @@ if (isset($_POST['add_product'])) {
    $categoryLower = strtolower(trim($category));
 
    if (empty($categoryLower) || !in_array($categoryLower, $validCategories)) {
-      $errors['category'] = 'Product category is required!';
+      $errors['category'] = 'Product category is required!(Must be men , women , kids 2-8y or kids 9-14y)';
    }
 
 
