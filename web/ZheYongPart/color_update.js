@@ -19,3 +19,7 @@ function removeColorInput(button) {
     const inputDiv = button.parentElement;
     inputDiv.remove();
 }
+
+
+
+jbahdba
