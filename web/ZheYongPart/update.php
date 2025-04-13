@@ -9,6 +9,11 @@ $select->bind_param("i", $id);
 $select->execute();
 $result = $select->get_result();
 $row = $result->fetch_assoc();
+$category = $row['category'] ?? '';
+$description = $row['description'] ?? '';
+$colors = json_decode($row['colors'] ?? '[]', true); // ✅ Fix here
+$errors = [];
+
 
 $category = $row['category'] ?? '';
 $description = $row['description'] ?? ''; // Make sure description is set from the database
@@ -23,7 +28,7 @@ if (isset($_POST['update_product'])) {
     $product_image = $_FILES['product_image']['name'] ?? '';
     $product_image_tmp_name = $_FILES['product_image']['tmp_name'] ?? '';
     $product_image_folder = 'W1Demo/image/' . $product_image;
-    $colors = json_decode($row['colors'], true);
+
 
     // Handle validations
     if (empty($product_name) || strlen($product_name) < 3) {
@@ -47,43 +52,87 @@ if (isset($_POST['update_product'])) {
         $errors['quantity'] = 'Valid product quantity is required!';
     }
 
-    // Handle image upload
-    if (!empty($product_image)) {
-        // Check for upload errors
-        $upload_error = $_FILES['product_image']['error'];
-        if ($upload_error === UPLOAD_ERR_OK) {
-            move_uploaded_file($product_image_tmp_name, $product_image_folder);
+
+    // Image folder path (relative to root)
+    $image_folder = 'W1Demo/image/';
+
+    // Handle main image upload
+    if (!empty($_FILES['product_image']['name'])) {
+        $product_image = $_FILES['product_image']['name'];
+        $product_image_tmp_name = $_FILES['product_image']['tmp_name'];
+        $main_image_path = '/' . $image_folder . basename($product_image);
+
+        if ($_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
+            if (move_uploaded_file($product_image_tmp_name, $image_folder . $product_image)) {
+                // Success
+            } else {
+                $errors['image'] = 'Failed to upload the main product image.';
+            }
         } else {
-            $errors['image'] = 'Error uploading the image.';
+            $errors['image'] = 'Error uploading the main image.';
         }
     } else {
-        $product_image = $row['image'];  // Use the existing image if none is uploaded
+        $main_image_path = $row['main_image']; // Use existing if no new image uploaded
     }
-    
+
+
+
 
     // Handle color variants
     $colorData = [];
-    foreach ($_POST['color_names'] as $index => $colorName) {
-        $colorName = trim($colorName);
-        if ($colorName) {
-            $colorFile = $_FILES['color_images']['name'][$index];
-            $colorTmp = $_FILES['color_images']['tmp_name'][$index];
-            if ($colorFile) {
-                $colorPath = '/W1Demo/image/' . $colorFile;
-                move_uploaded_file($colorTmp, $colorPath);
-            } else {
-                $colorPath = ''; // Optional fallback
+
+    foreach ($_POST['existing_color_names'] as $index => $existingColor) {
+        $existingImage = $_POST['existing_color_images'][$index]; // existing path
+
+        // Check if a new image was uploaded for this color
+        if (isset($_FILES['color_images']['name'][$index]) && $_FILES['color_images']['error'][$index] === UPLOAD_ERR_OK) {
+            $newColorFile = $_FILES['color_images']['name'][$index];
+            $newColorTmp = $_FILES['color_images']['tmp_name'][$index];
+
+            $newColorPath = '/' . $image_folder . basename($newColorFile);
+
+            if (move_uploaded_file($newColorTmp, $image_folder . $newColorFile)) {
+                $existingImage = $newColorPath; // replace old image path with new
             }
-            $colorData[] = ['color' => $colorName, 'image' => $colorPath];
+        }
+
+        $colorData[] = [
+            'color' => trim($existingColor),
+            'image' => $existingImage
+        ];
+    }
+
+
+    // Handle newly added colors with optional image upload
+    if (!empty($_POST['color_names'])) {
+        foreach ($_POST['color_names'] as $index => $colorName) {
+            $colorName = trim($colorName);
+            if ($colorName) {
+                $colorFile = $_FILES['color_images']['name'][$index] ?? '';
+                $colorTmp = $_FILES['color_images']['tmp_name'][$index] ?? '';
+                if (!empty($colorFile)) {
+                    $colorPath = '/' . $image_folder . basename($colorFile);
+                    move_uploaded_file($colorTmp, $image_folder . $colorFile);
+                } else {
+                    $colorPath = '';
+                }
+
+                $colorData[] = [
+                    'color' => $colorName,
+                    'image' => $colorPath
+                ];
+            }
         }
     }
 
-    $colorJson = json_encode($colorData);
+
 
     // If no errors, update
     if (empty($errors)) {
-        $update = $conn->prepare("UPDATE products SET name = ?, price = ?, category = ?, stock = ?, image = ?, description = ?, colors = ? WHERE id = ?");
-        $update->bind_param("sssssssi", $product_name, $product_price, $category, $quantity, $product_image, $description, $colorJson, $id);
+        $colorJson = json_encode($colorData);
+        $update = $conn->prepare("UPDATE products SET name = ?, price = ?, category = ?, stock = ?, main_image = ?, description = ?, colors = ? WHERE id = ?");
+        $update->bind_param("sssssssi", $product_name, $product_price, $category, $quantity, $main_image_path, $description, $colorJson, $id);
+
 
         if ($update->execute()) {
             $_SESSION['message'] = 'Product updated successfully!';
@@ -146,26 +195,23 @@ if (isset($_POST['update_product'])) {
                 <br>
 
                 <!-- New Color Field (JSON) -->
-                 <script src ="color.js"></script>
+                <script src="color_update.js"></script>
                 <label for=color class=size>Color Variants: </label><br>
                 <div id="color-inputs">
-                    <?php if (!empty($colors)) : ?>
-                        <?php foreach ($colors as $index => $color): ?>
-                            <div class="color-input">
-                                <input type="text" name="color_names[]" value="<?php echo htmlspecialchars($color['color']); ?>" class="box">
-                                <img src="<?php echo htmlspecialchars($color['image']); ?>" width="60">
-                                <input type="file" name="color_images[]" accept="image/*" class="box">
-                                <button type="button" class="remove-color-btn" onclick="removeColorInput(this)">Remove</button>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
+                    <?php foreach ($colors as $index => $color): ?>
                         <div class="color-input">
-                            <input type="text" name="color_names[]" placeholder="Enter color name (e.g., Red)" class="box">
+                            <input type="hidden" name="existing_color_images[]" value="<?php echo htmlspecialchars($color['image']); ?>">
+
+                            <input type="text" name="existing_color_names[]" value="<?php echo htmlspecialchars($color['color']); ?>" class="box">
+                            <img src="<?php echo htmlspecialchars($color['image']); ?>" width="60">
                             <input type="file" name="color_images[]" accept="image/*" class="box">
                             <button type="button" class="remove-color-btn" onclick="removeColorInput(this)">Remove</button>
                         </div>
-                    <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
+
+
+
 
                 <button type="button" onclick="addColorInput()">Add Another Color</button><br>
 
@@ -186,14 +232,13 @@ if (isset($_POST['update_product'])) {
                     <label for="input-file" id="drop-area" style="display: block; width: 100%; padding: 20px; border: 2px dashed #ccc; text-align: center; cursor: pointer;">
                         <div id="img-view" style="width: 100%; height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                             <!-- Show Current Image -->
-                            <img id="current-img" src="image/<?php echo htmlspecialchars($row['image']); ?>" alt="Current Image" width="100">
+                            <img src="<?php echo htmlspecialchars($row['main_image']); ?>" alt="Current Image" width="100">
                             <p>Drag and drop image here<br>or click to upload</p>
                             <span>Upload any image from desktop</span>
                         </div>
                     </label>
                 </div>
 
-                <input type="hidden" name="existing_image" value="<?php echo htmlspecialchars($row['image']); ?>">
                 <span class="error"><?php echo $errors['image'] ?? ''; ?></span>
 
                 <input type="submit" class="btn" name="update_product" value="Update Product">
